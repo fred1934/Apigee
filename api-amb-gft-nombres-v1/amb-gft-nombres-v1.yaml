@@ -1,0 +1,187 @@
+openapi: 3.0.3
+info:
+  title: API Prueba Técnica
+  description: |-
+      Api Generada para prueba practica de Apigee y Swagger   
+  version: 1.0.0
+servers:
+  - url: apigee/amb/gft/nombres/v1
+
+tags:
+  - name: Nombre
+    description: Realiza la insercion de hora y numero aleatorio en nombre
+    externalDocs:
+      description: Más informacion
+      url: http://documentacion-necesaria.com
+      
+
+paths:
+  /nombre:
+    post:
+
+      tags:
+        - Nombre
+      summary: Agrega hora y número aleatorio a los datos ingresados
+      description: Agrega datos y responde con un valor Json
+      requestBody:
+        description: Ingresa los datos necesarios nombre completo, edad y fecha de nacimiento 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/datosPersonales'
+        required: true
+      responses:
+        '200':
+          description: Operacion exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/peticionCorrecta'          
+        '400':
+          description: Preticion Incorrecta
+          content:         
+            application/json:
+              schema:
+                $ref: '#/components/schemas/respuestaError400'
+        '500':
+          description: Error interno
+          content:         
+            application/json:
+              schema:
+                $ref: '#/components/schemas/respuestaError500'
+        
+          
+      security:
+        - Bearer: []
+        
+  /nombre/xml:
+    post:
+      tags:
+        - Nombre
+      summary: Agrega hora y número aleatorio a los datos ingresados
+      description: Agrega datos y responde con un valor XML
+      requestBody:
+        description: Ingresa los datos necesarios nombre completo, edad y fecha de nacimiento 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/datosPersonales'
+        required: true
+      responses:
+        '200':
+          description: Operacion exitosa
+          content:         
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/peticionCorrecta'
+        '400':
+          description: Preticion Incorrecta
+          content:         
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/respuestaError400'
+        '500':
+          description: Error interno
+          content:         
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/respuestaError500'
+        
+      security:
+        - Bearer: []
+        
+components:
+  schemas:
+    datosPersonales:
+      required:
+        - Nombre completo
+        - Edad
+        - Fecha de nacimiento
+      type: object
+      properties:
+        nombre:
+          type: string
+          description: Nombre del usuario
+          example: Alfredo Martinez Bautista
+        edad:
+          type: integer
+          description: Edad del usuario
+          example: 26
+        fechaNacimiento:
+          type: string
+          description: Fecha de nacimiento del usuario
+          example: 24/07/1996
+      xml:
+        name: datosPersonales
+    peticionCorrecta:
+      type: object
+      properties:
+        codigo:
+          type: string
+          description: Código del error 200
+          example: 200.apigee-amb-gft-nombres-v1.25698
+        nombre:
+          type: string
+          description: Nombre del usuario
+          example: Alfredo Martinez Bautista
+        edad:
+          type: integer
+          description: Edad del usuario
+          example: 26
+        fechaNacimiento:
+          type: string
+          description: Fecha de nacimiento del usuario
+          example: 24/07/1996
+        datosAdicionales:
+          type: object
+          properties:
+            fecha:
+              type: string
+              description: Fecha de solicitud
+              example: 25/04/2023
+            hora:
+              type: string
+              description: Hora de la solicitud
+              example: 16:55
+            aleatorio:
+              type: integer
+              description: Identificador de la solicitud
+              example: 24
+              
+    respuestaError400:
+      type: object
+      properties:
+        codigo:
+          type: string
+          description: Código del error 400
+          example: "400.apigee-amb-gft-nombres-v1.100400"
+        detalles:
+          type: array
+          items:
+            type: string
+            example: "Parámetros no válidos, por favor valide su información."
+            description: Desglose del detalle de errores
+
+    respuestaError500:
+      type: object
+      properties:
+        codigo:
+          type: string
+          description: Código del error 500
+          example: "500.apigee-amb-gft-nombres-v1.100410"
+        detalles:
+          type: array
+          items:
+            type: string
+            example: "Error interno en el servido, contacte al administrador"
+            description: Desglose del detalle de errores
+
+  securitySchemes:
+      Bearer:
+        description: >
+          Para acceder a la API se debe pasar un token válido en todas las consultas.
+          La siguiente sintaxis se debe utilizar en el encabezado 'Authorization' :
+            Bearer: 2zzLJmBAtTNIU8nF8e8XbmDvaNGs
+        type: apiKey
+        name: Authorization
+        in: header

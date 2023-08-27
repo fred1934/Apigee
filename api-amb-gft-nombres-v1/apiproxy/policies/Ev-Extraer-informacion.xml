@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables continueOnError="true" enabled="true" name="Ev-Extraer-informacion">
+    <DisplayName>Ev-Extraer-informacion</DisplayName>
+    <Properties/>
+    <JSONPayload>
+        <Variable name="requestPayload">
+            <JSONPath>$</JSONPath>
+        </Variable>
+    </JSONPayload>
+</ExtractVariables>

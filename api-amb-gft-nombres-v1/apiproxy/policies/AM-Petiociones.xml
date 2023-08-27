@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-Petiociones">
+    <DisplayName>AM-Petiociones</DisplayName>
+    <Properties/>
+    <Set>
+        <StatusCode>429</StatusCode>
+        <ReasonPhrase>Too Many Request</ReasonPhrase>
+        <Headers>
+            <Header name="Content-Type">application/json</Header>
+        </Headers>
+        <Payload contentType="application/json">
+            {
+                "codigo": "429.apigee-amb-gft-nombres-v1.100400",
+                "detalles": [
+                "Se han excedido las peticiones permitidas"
+                     ]
+            }
+        </Payload>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="response"/>
+</AssignMessage>

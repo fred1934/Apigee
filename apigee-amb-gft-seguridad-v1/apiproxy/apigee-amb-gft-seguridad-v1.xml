@@ -1,0 +1,15 @@
+<APIProxy revision="3" name="apigee-amb-gft-seguridad-v1">
+    <DisplayName></DisplayName>
+    <Description></Description>
+    <CreatedAt>1691957688421</CreatedAt>
+    <LastModifiedAt>1691957688421</LastModifiedAt>
+    <BasePaths>/apigee-amb-gft-seguridad-v1</BasePaths>
+    <Policies>
+        <Policy>BA-Extraer-Consumer-Key</Policy>
+        <Policy>VK-Verficar-Consumer-Key</Policy>
+        <Policy>OA-Generar-Token</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+</APIProxy>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-Petiociones-Xml">
+    <DisplayName>AM-Petiociones-Xml</DisplayName>
+    <Set>
+        <StatusCode>429</StatusCode>
+        <ReasonPhrase>Too Many Request</ReasonPhrase>
+        <Payload contentType="text/xml">
+            <root>
+                <codigo>429.apigee-amb-gft-nombres-v1.100400</codigo>
+                <detalles>Se ha excedido las peticiones permitidas</detalles>
+            </root>
+        </Payload>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="response"/>
+</AssignMessage>

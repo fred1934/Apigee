@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <PreFlow name="PreFlow">
+        <Request/>
+        <Response/>
+    </PreFlow>
+    <Flows>
+        <Flow name="AccessTokenClientCredential">
+            <Description/>
+            <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST")</Condition>
+            <Request>
+                <Step>
+                    <Name>BA-Extraer-Consumer-Key</Name>
+                </Step>
+                <Step>
+                    <Name>VK-Verficar-Consumer-Key</Name>
+                </Step>
+                <Step>
+                    <Name>OA-Generar-Token</Name>
+                </Step>
+            </Request>
+            <Response/>
+        </Flow>
+    </Flows>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <HTTPProxyConnection>
+        <BasePath>/apigee-amb-gft-seguridad-v1</BasePath>
+    </HTTPProxyConnection>
+    <RouteRule name="noroute"/>
+</ProxyEndpoint>

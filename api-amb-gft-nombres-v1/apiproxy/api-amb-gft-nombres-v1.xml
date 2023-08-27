@@ -1,0 +1,30 @@
+<APIProxy revision="45" name="api-amb-gft-nombres-v1">
+    <DisplayName></DisplayName>
+    <Description></Description>
+    <CreatedAt>1691946399742</CreatedAt>
+    <LastModifiedAt>1691946399742</LastModifiedAt>
+    <BasePaths>/api/amb/gft/nombres/v1</BasePaths>
+    <Policies>
+        <Policy>Js-Respuesta</Policy>
+        <Policy>Js-Validacion</Policy>
+        <Policy>Ev-Extraer-informacion</Policy>
+        <Policy>AM-RespuestaDefault</Policy>
+        <Policy>JtoX-Regresa-Xml</Policy>
+        <Policy>RF-ErrorGenerico</Policy>
+        <Policy>AM-RespuestaDefault-Xml</Policy>
+        <Policy>SC-Peticiones</Policy>
+        <Policy>AM-Petiociones</Policy>
+        <Policy>AM-Petiociones-Xml</Policy>
+        <Policy>OA-Verifica-Acces-Token</Policy>
+        <Policy>AM-Limpiar-Header-Autorizacion</Policy>
+        <Policy>RF-Error-Token</Policy>
+        <Policy>AM-Error-Autentificacion</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://Js-Respuesta.js</Resource>
+        <Resource>jsc://Js-Validacion.js</Resource>
+    </Resources>
+</APIProxy>

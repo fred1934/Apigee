@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <DefaultFaultRule name="fault-rule">
+        <Step>
+            <Condition>(raisefault.RF-ErrorGenerico.failed = true) or (flow.error.code = 400)</Condition>
+            <Name>AM-RespuestaDefault</Name>
+        </Step>
+        <Step>
+            <Condition>(raisefault.RF-ErrorGenerico.failed = true) or (flow.error.code = 400) and (proxy.pathsuffix MatchesPath "/nombre/xml")</Condition>
+            <Name>AM-RespuestaDefault-Xml</Name>
+        </Step>
+        <Step>
+            <Name>AM-Petiociones</Name>
+            <Condition>(fault.name = "QuotaViolation") or (fault.name = "SpikeArrestViolation") </Condition>
+        </Step>
+        <Step>
+            <Name>AM-Petiociones-Xml</Name>
+            <Condition>(fault.name = "QuotaViolation") or (fault.name = "SpikeArrestViolation") and (proxy.pathsuffix MatchesPath "/nombre/xml") </Condition>
+        </Step>
+        <Step>
+            <Condition>(raisefault.RF-Error-Token.failed = true) or (flow.error.code = 401)</Condition>
+            <Name>AM-Error-Autentificacion</Name>
+        </Step>
+        <AlwaysEnforce>true</AlwaysEnforce>
+    </DefaultFaultRule>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>OA-Verifica-Acces-Token</Name>
+            </Step>
+            <Step>
+                <Condition>(oauthV2.OA-Verifica-Acces-Token.failed = true)</Condition>
+                <Name>RF-Error-Token</Name>
+            </Step>
+            <Step>
+                <Name>AM-Limpiar-Header-Autorizacion</Name>
+            </Step>
+            <Step>
+                <Name>SC-Peticiones</Name>
+            </Step>
+            <Step>
+                <Name>Ev-Extraer-informacion</Name>
+            </Step>
+            <Step>
+                <Condition>(extractvariables.Ev-Extraer-informacion.failed = true)</Condition>
+                <Name>RF-ErrorGenerico</Name>
+            </Step>
+            <Step>
+                <Condition>(flow.error.code != null)</Condition>
+                <Name>RF-Error-Token</Name>
+            </Step>
+        </Request>
+        <Response>
+            <Step>
+                <Name>Js-Validacion</Name>
+            </Step>
+            <Step>
+                <Name>Js-Respuesta</Name>
+            </Step>
+        </Response>
+    </PreFlow>
+    <Flows>
+        <Flow name="/nombre">
+            <Description>nombre</Description>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/nombre") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="/nombre/xml">
+            <Description>nombre/xml</Description>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/nombre/xml") and (request.verb = "POST")</Condition>
+        </Flow>
+    </Flows>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response>
+            <Step>
+                <Name>JtoX-Regresa-Xml</Name>
+                <Condition>(proxy.pathsuffix MatchesPath "/nombre/xml")</Condition>
+            </Step>
+        </Response>
+    </PostFlow>
+    <HTTPProxyConnection>
+        <BasePath>/api/amb/gft/nombres/v1</BasePath>
+    </HTTPProxyConnection>
+    <RouteRule name="noroute"/>
+</ProxyEndpoint>

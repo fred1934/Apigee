@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AM-RespuestaDefault">
+    <DisplayName>AM-RespuestaDefault</DisplayName>
+    <Set>
+        <StatusCode>400</StatusCode>
+        <ReasonPhrase>Bad Request</ReasonPhrase>
+        <Headers>
+            <Header name="Content-Type">application/json</Header>
+        </Headers>
+        <Payload contentType="application/json">
+                {
+                    "codigo": "400.apigee-amb-gft-nombres-v1.100400",
+                    "detalles": [
+                    "Parámetros no válidos, por favor valide su información."
+                         ]
+                }
+            </Payload>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="response"/>
+</AssignMessage>
